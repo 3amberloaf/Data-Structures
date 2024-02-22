@@ -1,4 +1,6 @@
 # Check if a given Binary Tree is Heap using Complete Binary Tree
+# Time Complexity: O(N), where N is the number of nodes
+# Auxiliary Space: O(logN), for recursive stack space.
 
 class GFG:
 	def __init__(self, value):
