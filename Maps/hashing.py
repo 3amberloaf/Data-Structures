@@ -20,11 +20,13 @@ def hash_function(student_id):
     return student_id % address_space
 
 # Inserts student record into hash table using seperate chaining 
-def insert_student_record(hash_table, student_record):
-    hash_address = hash_function(student_record.student_id)
-    if hash_table[hash_address] is None:
-        hash_table[hash_address] = [] # If a hash address is empty, it initializes an empty list
-    hash_table[hash_address].append(student_record)  # Adds student record to corresponding hash table list
+def insert_student_record(hash_table, student_record, collision_counter):
+    hash_address = hash_function(student_record.student_id) # finds hash address of student ID
+    if hash_table[hash_address] is None:   
+        hash_table[hash_address] = [student_record] # if no hash address, then add the student record
+    else:
+        collision_counter['count'] += 1
+        hash_table[hash_address].append(student_record)  # Adds student record to corresponding hash table list
     
 # Finds and returns student record 
 def find_student_record(hash_table, student_id):
@@ -36,15 +38,32 @@ def find_student_record(hash_table, student_id):
                 return record # Finds and returns student ID
     return None
 
+student_ids = list(range(1, num_students + 1))
+
 # Initialize the hash table
 hash_table = [None] * address_space
+collision_counter = {'count': 0}
 
-# Example student
-student_record = StudentRecord(10001, "Admissions Info", "Transcript Info", "Degree Works Info", "Bursar Bill Info", "Payment Info")
-insert_student_record(hash_table, student_record)
+for student_id in student_ids:
+    # Create a mock StudentRecord for each student ID
+    student_record = StudentRecord(
+        student_id=student_id, 
+        admissions_credentials=f"Credentials {student_id}", 
+        transcripts=f"Transcripts {student_id}", 
+        degree_works=f"Degree Works {student_id}", 
+        bursar_bills=f"Bursar Bills {student_id}", 
+        payments=f"Payments {student_id}"
+    )
+    insert_student_record(hash_table, student_record, collision_counter)
 
-retrieved_record = find_student_record(hash_table, 10001)
+# Example: Retrieve a student record
+retrieved_record = find_student_record(hash_table, 10301)
 if retrieved_record:
-    print("Student Record Found:", retrieved_record.student_id, retrieved_record.admissions_credentials)
+    print(f"Student Record Found: {retrieved_record.student_id}, {retrieved_record.admissions_credentials}")
 else:
     print("Student Record Not Found")
+
+# Print the total number of collisions
+print(f"Total collisions: {collision_counter['count']}")
+
+
