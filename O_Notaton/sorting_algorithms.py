@@ -100,44 +100,37 @@ def quick_sort(arr):
         arr[i + 1], arr[high] = arr[high], arr[i + 1]
         return i + 1
 
-    def recursive(arr, low, high):
+    def quick_sort_helper(arr, low, high):
         if low < high:
-            partition_arr= partition(arr, low, high)
-            recursive(arr, low, partition_arr- 1)
-            recursive(arr, partition_arr+ 1, high)
+            pi = partition(arr, low, high)
+            quick_sort_helper(arr, low, pi - 1)
+            quick_sort_helper(arr, pi + 1, high)
 
-    recursive(arr, 0, len(arr) - 1)
+    quick_sort_helper(arr, 0, len(arr) - 1)
+    
 
-def test_algorithm(sort_function, test_array):
-    start_time = time.perf_counter()
-    sort_function(test_array)
-    duration = time.perf_counter() - start_time
-    return duration
-
-# Main testing procedure adjusted to run algorithms on the same array
 def main():
-    array_sizes = [10, 100, 1000, 10000]
-    sorting_algorithms = [selection_sort, insertion_sort, heap_sort, merge_sort, quick_sort]
-
-    results = {size: {} for size in array_sizes}
+    array_sizes = [10, 100, 1000, 10000, 1000000, 10000000]
+    sorting_algorithms = [
+        ("selection_sort", selection_sort),
+        ("insertion_sort", insertion_sort),
+        ("heap_sort", heap_sort),
+        ("merge_sort", merge_sort),
+        ("quick_sort", quick_sort)
+    ]
 
     for size in array_sizes:
-        base_array = [random.randint(1, 100) for _ in range(size)]
-        
-        for sort_function in sorting_algorithms:
-            # Making a copy of the base array for fairness
-            test_array = base_array.copy()
-
-            # Measure and record execution time
-            duration = test_algorithm(sort_function, test_array)
-            results[size][sort_function.__name__] = duration
-
-    # Print results
-    for size, timings in results.items():
         print(f"Array Size: {size}")
-        for sort_name, duration in timings.items():
-            print(f"{sort_name}: {duration:.6f} sec")
-        print("\n")
+        test_array = [random.randint(1, 100) for _ in range(size)]
         
+        for name, sort_function in sorting_algorithms:
+            copied_array = test_array.copy()
+            start_time = time.time()
+            sort_function(copied_array)
+            duration = time.time() - start_time
+            print(f"{name}: {duration:.6f} sec")
+        
+        print("\n")
+
 if __name__ == "__main__":
     main()
