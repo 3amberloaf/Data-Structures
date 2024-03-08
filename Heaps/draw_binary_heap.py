@@ -32,7 +32,7 @@ def draw_heap_tree(screen, heap, level, x, y, spacing, parent_x=None, parent_y=N
         draw_heap_tree(screen, heap, 2 * level + 2, x + spacing, y + 100, spacing / 2, x, y)
 
 # Example usage
-heap_example = [475, 360, 248, 249, 251, 250]
+heap_example = [2, 276, 264, 270, 250]
 
 # Create Pygame screen
 screen = pygame.display.set_mode((width, height))
