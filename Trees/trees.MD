@@ -2,6 +2,9 @@
 
 A tree is a data structure that stores elements heirarchically with the root as the top element and parent/children being the subtrees. Nodes store elements in a parent/child relationship, an **internal** node has at least one child while an **external** node has none.
 
+![alt text](image-1.png)
+This image is a general tree structure because the root node has 4 children, making it not a binary Tree. 
+
 ## Depth 
 
 The depth of a tree is the total number of ancestors excluding the root itself, meaning the depth of the root is always 0 and the depth of the root v is (1 + depth of parent of v). 
@@ -49,6 +52,9 @@ An ordered tree is a tree with a linear ordering defined for the children of eac
 
 A binary tree is an ordered tree where each node has at most two children. It is called a proper binary tree when each internal node has two children. 
 
+![alt text](image-2.png)
+This is a binary tree, as shown by each node having at most two children. 
+
 ### Properties of a Binary Tree
 
 Let T be a proper binary tree with n nodes, and let h denote the
@@ -58,6 +64,21 @@ height of T. Then T has the following properties:
 2. The number of internal nodes in T is at least h and at most 2h − 1.
 3. The total number of nodes in T is at least 2h + 1 and at most 2h+1 − 1.
 4. The height of T is at least log(n + 1) − 1 and at most (n − 1)/2, that is, log(n + 1) − 1 ≤ h ≤ (n − 1)/2.
+
+There is no specific ordering in terms of how the nodes are arranged or the values that they hold. This means that **the left child can have a value greater or less than its parent, and the same goes for the right child.**
+
+## Binary Search Tree
+
+A binary search tree is a special binary tree that maintains a sorted order of elements. 
+
+### BST Properties
+
+1. In a BST, the left child of a node contains a value less than its parent node, and the right child of a node contains a value greater than its parent node. This property applies to every node in the tree and is what gives a BST its name and sorted characteristic.
+2. The ordering of nodes in a BST allows for efficient searching, insertion, and deletion operations, which can be performed in O(log⁡ n) time complexity in a balanced BST.
+3. Because of this order property, an in-order traversal of a BST will visit the nodes in ascending sorted order.
+
+![alt text](image-3.png)
+In this image, all left nodes are smaller than their parents, and all right nodes are greater than their parents. 
 
 ## Decision Tree
 
