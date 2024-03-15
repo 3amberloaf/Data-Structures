@@ -1,4 +1,6 @@
 # Binary search using recursion
+# Time complexity O(log n)
+# Space complexity O(log n)
 
 def binary_search(array, low, high,x):
     # returns index of x in array if present
