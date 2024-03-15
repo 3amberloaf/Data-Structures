@@ -26,8 +26,8 @@ def left_most_binary_search(array, left, right, x):
         return -1  
         # x is not in the array
 
-array = [2, 4, 5, 5, 5, 8, 10, 20, 25]
-x = 5
+array = [2, 4, 4, 4, 5, 5, 5, 5, 5, 8, 10, 20, 25] # must be sorted for binary search
+x = 4
 
 result = left_most_binary_search(array, 0, len(array) - 1, x)
 
