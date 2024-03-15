@@ -79,7 +79,8 @@ To insert a node, we look for an external node and add the internal node with th
         # or decide not to insert a duplicate, depending on the use case
 ```
 
-![alt text](image-4.png)
+![alt text](../photos/image-4.png)
+
 In this image, we search for key 5 using Tree Search. We assume 5 is not in the tree and we have reached the bottom at node w. We insert 5 at node w and expand w into an internal node to make room for it by giving it two children. 
 
 ## Deletion
@@ -121,10 +122,10 @@ To delete a key, we search for an internal node storing the value and remove it.
         self.root = self.remove(key, self.root)
 
  ```
-![alt text](image-5.png)
+![alt text](../photos/image-5.png)
 
 In this image, we search for key 4 using Tree Search. Since 4 has a lead child w that has no children, we remove 4 and w from the tree with operation removeExternal(w). This will remove w and its parent. 
 
-![alt text](image-6.png)
+![alt text](../photos/image-6.png)
 
 In this example, we want to remove key 3 at node v. Since node v has two internal children (both of its children have children and thus cannot ve removed), we will instead find the internal node w that follows v in an inorder traversal. It will choose w because it is the smallest node and fulfills the BST properties. Then, we copy key(w) into node v and we remove node w and its left child z (which must be a leaf) by means of operation removeExternal(z). 
