@@ -8,7 +8,7 @@ def reverseArray(array):
     for i in range(n):
         stack.append(array[i])
     
-    # Iterate through length of array and remove items from arrays index
+    # Iterate through length of array and remove items from arrays index in reverse order
     for i in range(n):
         array[i] = stack.pop()
     
@@ -17,3 +17,5 @@ def reverseArray(array):
 original_array = [1, 2, 3, 4, 5]
 reversed_array = reverseArray(original_array.copy())  # Using .copy() to avoid modifying the original array
 print(reversed_array)
+
+
