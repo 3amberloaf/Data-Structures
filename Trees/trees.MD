@@ -54,6 +54,7 @@ An ordered tree is a tree with a linear ordering defined for the children of eac
 A binary tree is an ordered tree where each node has at most two children. It is called a proper binary tree when each internal node has two children. 
 
 ![alt text](../photos/image-2.png)
+
 This is a binary tree, as shown by each node having at most two children. 
 
 ### Properties of a Binary Tree
@@ -80,7 +81,7 @@ A binary search tree is a special binary tree that maintains a sorted order of e
 
 ![alt text](../photos/image-3.png)
 
-In this image, all left nodes are smaller than their parents, and all right nodes are greater than their parents. 
+**In this image, all left nodes are smaller than their parents, and all right nodes are greater than their parents. **
 
 ## Decision Tree
 
