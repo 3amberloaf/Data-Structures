@@ -58,6 +58,7 @@ def huffmanEncoding(string):
     return root
 
 def print_codes(node, code=""):
+    # The code for each character is determined by the path taken to reach it from the root
     if node.character is not None:
         print(f"{node.character}: {code}")
         return
