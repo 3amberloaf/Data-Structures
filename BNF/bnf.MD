@@ -1,6 +1,6 @@
 # Backus Naur Form
 
-BNF is a notation technique used to express the syntax of programming languages, command/instruction sets, and communication protocols. It is a mathematical way to describe a language by using a set of derivative rules, each describing how a symbol can be replaced with a sequence of symbols. These symbols can be terminal or lexemes (actual symbols of the language that CANNOT be simplified) or non-terminal(placeholders for patterns of symbols). The rules define how to form valid strings (sentances) in the language. 
+BNF is a notation technique used to express the syntax of programming languages, command/instruction sets, and communication protocols. It is a mathematical way to describe a language by using a set of derivative rules, each describing how a symbol can be replaced with a sequence of symbols. These symbols can be terminal or lexemes or non-terminal. The rules define how to form valid strings (sentances) in the language. 
 
 **Represent**
 
@@ -8,6 +8,9 @@ BNF is a notation technique used to express the syntax of programming languages,
 2. | vertical lines represent 'or'
 3. LHS: Left hand side, always non-terminals
 4. RHS: Right hand side, either a terminal or non-terminal
+5. ::= means 'is defined as'
+6. Terminal: actual symbols of the language that CANNOT be simplified
+7. Non-terminals: placeholders for patterns of symbols
 
 **LHS --> RHS Terminal Example**
 
@@ -78,3 +81,4 @@ Problem with this example is that we could have chose 0 as the first digit, whic
     - A digit can either be a 0 or a nonzero (number from 1-9)
 4. <nonzero> -> 1|2|3|4|5|6|7|8|9 
     - A nonzero is any number from 1-9
+
