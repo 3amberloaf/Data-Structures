@@ -1,5 +1,113 @@
 # Parse Trees using BNF
 
+Precedence: Certain operators have more precedence over others
+    - `x + 5 * y` should be interpreted as `x + (5 * y)
+
+Associativity: For certain operators, we process them in order
+    - `7 - 5 + 1` is 3 
+
+**Syntax**
+
+Rules: Define legal expression
+Non-Terminal: Grammar symbols
+Terminal: Operators (+,-,*,/, ()) or identifiers
+ID: One or more characters
+    - `char {char}`
+Integer: one or more digits
+    - `digit {digit}
+
+E -> T + E | T = E | T
+T -> F * T | F / T | F
+F -> ID | Integer | (E) - F
+
+### Lexical Analysis
+
+A 'lexer'/'tokenizer' will read the input and break it into tokens. 
+
+## Classes
+
+TreeNode // Superclass
+    Add // Subclasses
+    Subtract
+    Multiply
+    Divide
+    Negate
+    ID
+    Integer
+
+
+## Print a Tree
+
+Each class recursively calls to implements a print method.
+
+# Top Down Recursive Descent Parsing Algorithm
+
+**Functions**
+One function for each non-terminal grammar symbol, each will scan a bunch of tokens and return a pointer to the three it builds.
+
+- parseE()
+- parseT()
+- parseF()
+
+**Details**
+At any moment, `nextToken` will contain the next UNSCANNED thing from the input. We will call `nextToken()` to advance and return null if error.
+
+## Main
+
+**Variables**
+    nextToken
+    resultTree
+
+**Code**
+scanToken()
+resultTree = parseE()
+if nextToken <> \n
+    error
+resultTree.print()
+print(result.Tree.eval())
+
+## Parse F 
+F -> ID | Integer | (E) | - F
+
+**Code**
+if nextToken is ID
+    return nextToken
+else if nextToken is Integer
+    return nextToken
+else if nextToken is "("
+    scanToken() // Scan past "("
+    a = parseE()
+    if (a == NULL)
+        return NULL
+    if nextToken is ")"
+        scanToken()
+        return a
+    else 
+        return NULL
+else if nextToken is "-"
+    scanToken()
+    return new Neg(parseF())
+else 
+    return NULL
+
+## Parse E
+E -> T { + | - T}
+
+parseE:
+    a = parseT()
+    while true
+        if nextToken == "+"
+            scanToken()
+            b = parseT()
+            a = newAdd(a,b)
+        else if nextToken == "-"
+            scanToken()
+            b = parseT()
+            a = newSubtract(a,b) // a is pointer to previous node, v is pointer to new term being processes
+        else
+            return a
+
+
 **Example**
 
 ```go

@@ -49,7 +49,7 @@ def parse_expression():
 
     while current_spot in ("+", "-"): 
         operator = current_spot
-        get_next_token()
+        scan_token()
         right = parse_term()
         node = TreeNode(operator, node, right)
 
@@ -62,7 +62,7 @@ def parse_expression():
 2. `node = parse_term()`: Parses the expression and returns a `TreeNode` expressing that term. This term becomes the initial node of the expression tree.
 3. `while current_spot in ("+", "-")`: loops through expression when its addition or subtraction
     - `operator = current_spot`: Stores the operator (either + or -) in the current_spot variable
-    - `get_next_token()`: Updates current_spot to next spot in expression
+    - `scan_token()`: Updates current_spot to next spot in expression
     - `right = parse_term()`: Parses the next term in expression (becomes right node of Tree)
     - `node = TreeNode(operator, node, right)`: Creates a new TreeNode with the current operator as its value, the current node as its left child, and the new erm (right) as its right child. 
 4. `return node`: Returns the root node of the constructed expression tree
@@ -78,7 +78,7 @@ def parse_term():
 
     while current_spot in ("*", "/"):
         operator = current_spot
-        get_next_token()
+        scan_token()
         right = parse_factor()
         node = TreeNode(operator, node, right) 
 
@@ -89,7 +89,7 @@ def parse_term():
 2. `node = parse_factor()`: Parses a single factor and returns a `TreeNode` expressing that factor. This term becomes the initial node of the term.
 3. `while current_spot in ("*", "/")`: loops through expression when its multiplication or division
     - `operator = current_spot`: Stores the operator (either * or /) in the current_spot variable
-    - `get_next_token()`: Updates current_spot to next spot in expression
+    - `scan_token()`: Updates current_spot to next spot in expression
     - `right = parse_term()`: Parses the next term in expression (becomes right node of Tree)
     - `node = TreeNode(operator, node, right)`: Creates a new TreeNode with the current operator as its value. The existing node becomes the left child of this new node, and the newly parsed factor (right) becomes the right child. This effectively builds a subtree of the expression tree, representing the multiplication or division operation just parsed.
 4. `return node`: Returns the root node of the constructed subtree
@@ -103,30 +103,30 @@ def parse_factor():
     """Parse a factor, which could be an expression in parentheses or a literal."""
     global current_spot
     if current_spot == "(":
-        get_next_token()  # Skip '('
+        scan_token()  # Skip '('
         node = parse_expression()
         if current_spot != ")":
             raise Exception("Expected ')'")
-        get_next_token()  # Skip ')'
+        scan_token()  # Skip ')'
     else:
         if not current_spot.isdigit():
             raise Exception("Expected number")
         node = TreeNode(current_spot)
-        get_next_token()
+        scan_token()
 
     return node
 ```
 
 1. `global current_spot`: A global variable used to keep track of the number/operation that is currently being processed.
 2. `if current_spot == "("`: Checks if the current token is an opening parenthesis (. If so, the code will treat the following tokens as a sub-expression until a closing parenthesis ) is encountered.
-    - `get_next_token()`: move past ()
+    - `scan_token()`: move past ()
     - `node = parse_expression()`: Parses the expression inside the ()
     - `if current_spot != ")"`: If the token isnt closing ()
        - `raise Exception("Expected ')'")`: Raise error
-    - `get_next_token()`: Moves past the closing parenthesis by updating current_spot to the next token, assuming the sub-expression was correctly closed
+    - `scan_token()`: Moves past the closing parenthesis by updating current_spot to the next token, assuming the sub-expression was correctly closed
 4. `else:if not current_spot.isdigit()`: Raises error if current spot is not ()
     - `node = TreeNode(current_spot)`: Creates a new TreeNode with the current token as its value. This assumes that current_spot is a digit (a number) and creates a leaf node in the expression tree representing this number.
-    - `get_next_token()`: updated spot
+    - `scan_token()`: updated spot
 5. `return node`: Returns tree
 
 ## Update spot
@@ -134,7 +134,7 @@ def parse_factor():
 This function is responsible for fetching the next token from an input string (which represents the arithmetic expression) and updating the global variable current_spot to reflect this token.
 
 ```python
-def get_next_token():
+def scan_token():
     """Fetch the next token from the input string."""
     global current_spot, arithmetic_expression_string
     arithmetic_expression_string = arithmetic_expression_string.lstrip()  # Strip leading whitespace
@@ -166,4 +166,6 @@ def get_next_token():
                     break`
 If current_spot is a digit, it iterates through the subsequent characters in arithmetic_expression_string to check if they are also digits. It concatenates these digits to current_spot, forming a complete numeric token.
 The loop breaks upon encountering a non-digit character, indicating the end of the numeric token.
-7. 
+7. `arithmetic_expression_string = arithmetic_expression_string[len(current_spot):]`: Updates arithmetic_expression_string by removing the part that has been processed as the current token. If the token is a number with multiple digits, it removes the entire number.
+8. `else:arithmetic_expression_string = arithmetic_expression_string[1:]`: If the current token is not a digit (meaning it's an operator or a parenthesis), it simply removes the first character from arithmetic_expression_string.
+9. `return current_spot`: Returns the current token (current_spot), which could be a number, an operator, or a parenthesis.

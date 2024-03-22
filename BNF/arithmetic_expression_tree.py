@@ -1,71 +1,76 @@
+class Lexer:
+    """ Breaks down strings into tokens """
+    def __init__(self, text):
+        self.text = text.replace(' ', '')  # Remove whitespace
+        self.index = 0  
+        self.current_token = None  
+        self.scan_token()  # Scan tokens immediately
+
+    def scan_token(self):
+        """ Updates token attribute"""
+        if self.index >= len(self.text): # Reach end of index and reset token to none
+            self.current_token = None
+            return
+        
+        character= self.text[self.index] 
+        
+        """ If character is a digit, token reads all the digits"""
+        if character.isdigit():
+            start_index = self.index
+            while self.index < len(self.text) and self.text[self.index].isdigit():
+                self.index += 1
+            self.current_token = self.text[start_index:self.index]
+        else:
+            """ If not a digit, move past """
+            self.current_token = character
+            self.index += 1
+
 class TreeNode:
-    """A node in the arithmetic expression tree."""
+    """Superclass to instantiate nodes in the expression tree."""
     def __init__(self, value, left=None, right=None):
         self.value = value
         self.left = left
         self.right = right
 
-def parse_expression():
-    """Parse an expression that involves addition or subtraction and use a global variable to keep track of number being processed"""
-    global current_spot
-    node = parse_term()
+def parse_expression(lexer):
+    """Parse an expression that involves addition or subtraction."""
+    node = parse_term(lexer)
 
-    while current_spot in ("+", "-"): 
-        operator = current_spot
-        get_next_token()
-        right = parse_term()
+    while lexer.current_token in ("+", "-"): 
+        operator = lexer.current_token
+        lexer.scan_token()
+        right = parse_term(lexer)
         node = TreeNode(operator, node, right)
 
     return node
 
-def parse_term():
+def parse_term(lexer):
     """Parse a term that involves multiplication or division."""
-    global current_spot
-    node = parse_factor()
+    node = parse_factor(lexer)
 
-    while current_spot in ("*", "/"):
-        operator = current_spot
-        get_next_token()
-        right = parse_factor()
-        node = TreeNode(operator, node, right) 
+    while lexer.current_token in ("*", "/"):
+        operator = lexer.current_token
+        lexer.scan_token()
+        right = parse_factor(lexer)
+        node = TreeNode(operator, node, right)
 
     return node
 
-def parse_factor():
-    """Parse a factor, which could be an expression in parentheses or a literal."""
-    global current_spot
-    if current_spot == "(":
-        get_next_token()  # Skip '('
-        node = parse_expression()
-        if current_spot != ")":
+def parse_factor(lexer):
+    """Parse factors"""
+    if lexer.current_token == "(":
+        lexer.scan_token()  # Skip '('
+        node = parse_expression(lexer)
+        if lexer.current_token != ")":
             raise Exception("Expected ')'")
-        get_next_token()  # Skip ')'
+        lexer.scan_token()  # Skip ')'
     else:
-        if not current_spot.isdigit():
+        if not lexer.current_token.isdigit():
             raise Exception("Expected number")
-        node = TreeNode(current_spot)
-        get_next_token()
+        node = TreeNode(lexer.current_token)
+        lexer.scan_token()
 
     return node
-
-def get_next_token():
-    """Fetch the next token from the input string."""
-    global current_spot, arithmetic_expression_string
-    arithmetic_expression_string = arithmetic_expression_string.lstrip()  # Strip leading whitespace
-    if not arithmetic_expression_string:
-        current_spot = None  # End of input
-    else:
-        current_spot = arithmetic_expression_string[0]
-        if current_spot.isdigit():  # Handle multi-character numbers
-            for i, char in enumerate(arithmetic_expression_string[1:], 1):
-                if char.isdigit():
-                    current_spot += char
-                else:
-                    break
-            arithmetic_expression_string = arithmetic_expression_string[len(current_spot):]
-        else:
-            arithmetic_expression_string = arithmetic_expression_string[1:]
-    return current_spot
 
 def evaluate_tree(node):
     """Evaluate the arithmetic expression represented by the tree."""
@@ -79,7 +84,7 @@ def evaluate_tree(node):
         return evaluate_tree(node.left) * evaluate_tree(node.right)
     elif node.value == "/":
         return evaluate_tree(node.left) / evaluate_tree(node.right)
-    
+
 def print_tree(node, prefix=""):
     """Prints the expression tree in a structured manner."""
     if node is not None:
@@ -87,27 +92,10 @@ def print_tree(node, prefix=""):
         print(prefix + f"-- {node.value}")
         print_tree(node.left, prefix + "    ")
 
-def print_expression(node):
-    """Prints the arithmetic expression represented by the tree."""
-    if node is None:
-        return ""
-    if node.left is None and node.right is None:
-        return node.value
-    left_expr = print_expression(node.left)
-    right_expr = print_expression(node.right)
-    if node.value in "+-*/":
-        return f"({left_expr} {node.value} {right_expr})"
-    return node.value
+### Execute ###
 
-
-
-# Main execution flow
-arithmetic_expression_string = input("Enter an arithmetic expression: ").replace(' ', '')
-current_spot = ""
-get_next_token()
-expression_tree = parse_expression()
-
-# Evaluation
+expression = Lexer('3-9')
+expression_tree = parse_expression(expression)
 result = evaluate_tree(expression_tree)
 print("Result of Evaluation:", result)
 
