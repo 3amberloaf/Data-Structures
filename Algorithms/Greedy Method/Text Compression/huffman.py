@@ -2,7 +2,6 @@
 
 import heapq
 from collections import defaultdict
-
 class Node:
     def __init__(self, character, frequency):
         self.character = character
