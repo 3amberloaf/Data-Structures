@@ -6,12 +6,12 @@ class TreeNode:
         self.right = right
 
 def parse_expression():
-    """Parse an expression that involves addition or subtraction."""
-    global current_token
+    """Parse an expression that involves addition or subtraction and use a global variable to keep track of number being processed"""
+    global current_spot
     node = parse_term()
 
-    while current_token in ("+", "-"):
-        operator = current_token
+    while current_spot in ("+", "-"): 
+        operator = current_spot
         get_next_token()
         right = parse_term()
         node = TreeNode(operator, node, right)
@@ -20,52 +20,52 @@ def parse_expression():
 
 def parse_term():
     """Parse a term that involves multiplication or division."""
-    global current_token
+    global current_spot
     node = parse_factor()
 
-    while current_token in ("*", "/"):
-        operator = current_token
+    while current_spot in ("*", "/"):
+        operator = current_spot
         get_next_token()
         right = parse_factor()
-        node = TreeNode(operator, node, right)
+        node = TreeNode(operator, node, right) 
 
     return node
 
 def parse_factor():
     """Parse a factor, which could be an expression in parentheses or a literal."""
-    global current_token
-    if current_token == "(":
+    global current_spot
+    if current_spot == "(":
         get_next_token()  # Skip '('
         node = parse_expression()
-        if current_token != ")":
+        if current_spot != ")":
             raise Exception("Expected ')'")
         get_next_token()  # Skip ')'
     else:
-        if not current_token.isdigit():
+        if not current_spot.isdigit():
             raise Exception("Expected number")
-        node = TreeNode(current_token)
+        node = TreeNode(current_spot)
         get_next_token()
 
     return node
 
 def get_next_token():
     """Fetch the next token from the input string."""
-    global current_token, arithmetic_expression_string
+    global current_spot, arithmetic_expression_string
     arithmetic_expression_string = arithmetic_expression_string.lstrip()  # Strip leading whitespace
     if not arithmetic_expression_string:
-        current_token = None  # End of input
+        current_spot = None  # End of input
     else:
-        current_token = arithmetic_expression_string[0]
-        if current_token.isdigit():  # Handle multi-character numbers
+        current_spot = arithmetic_expression_string[0]
+        if current_spot.isdigit():  # Handle multi-character numbers
             for i, char in enumerate(arithmetic_expression_string[1:], 1):
                 if char.isdigit():
-                    current_token += char
+                    current_spot += char
                 else:
                     break
-            arithmetic_expression_string = arithmetic_expression_string[len(current_token):]
+            arithmetic_expression_string = arithmetic_expression_string[len(current_spot):]
         else:
             arithmetic_expression_string = arithmetic_expression_string[1:]
-    return current_token
+    return current_spot
 
 def evaluate_tree(node):
     """Evaluate the arithmetic expression represented by the tree."""
@@ -103,7 +103,7 @@ def print_expression(node):
 
 # Main execution flow
 arithmetic_expression_string = input("Enter an arithmetic expression: ").replace(' ', '')
-current_token = ""
+current_spot = ""
 get_next_token()
 expression_tree = parse_expression()
 
