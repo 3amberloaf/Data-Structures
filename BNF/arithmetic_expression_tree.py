@@ -34,21 +34,9 @@ class TreeNode:
 
 def parse_expression(lexer):
     """Parse an expression that involves addition or subtraction."""
-    node = parse_term(lexer)
-
-    while lexer.current_token in ("+", "-"): 
-        operator = lexer.current_token
-        lexer.scan_token()
-        right = parse_term(lexer)
-        node = TreeNode(operator, node, right)
-
-    return node
-
-def parse_term(lexer):
-    """Parse a term that involves multiplication or division."""
     node = parse_factor(lexer)
 
-    while lexer.current_token in ("*", "/"):
+    while lexer.current_token in ("*", "/"): 
         operator = lexer.current_token
         lexer.scan_token()
         right = parse_factor(lexer)
@@ -57,12 +45,24 @@ def parse_term(lexer):
     return node
 
 def parse_factor(lexer):
+    """Parse a term that involves multiplication or division."""
+    node = parse_term(lexer)
+
+    while lexer.current_token in ("+", "-"):
+        operator = lexer.current_token
+        lexer.scan_token()
+        right = parse_term(lexer)
+        node = TreeNode(operator, node, right)
+
+    return node
+
+def parse_term(lexer):
     """Parse factors"""
-    if lexer.current_token == "(":
+    if lexer.current_token == "{":
         lexer.scan_token()  # Skip '('
         node = parse_expression(lexer)
-        if lexer.current_token != ")":
-            raise Exception("Expected ')'")
+        if lexer.current_token != "}":
+            raise Exception("Expected '}'")
         lexer.scan_token()  # Skip ')'
     else:
         if not lexer.current_token.isdigit():
@@ -94,7 +94,7 @@ def print_tree(node, prefix=""):
 
 ### Execute ###
 
-expression = Lexer('3-9')
+expression = Lexer('{4+2}*{3-1}')
 expression_tree = parse_expression(expression)
 result = evaluate_tree(expression_tree)
 print("Result of Evaluation:", result)
