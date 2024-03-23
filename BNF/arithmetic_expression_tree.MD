@@ -1,10 +1,10 @@
 # Arithmetic Expression Tree
 
-Arithmetic expression trees are a way to represent expressions through a binary tree structure, where each node is an operator or operand. They're especially useful for evaluating and manipulating mathematical expressions programmatically.
+Arithmetic expression trees are a way to represent expressions through a binary tree structure, where each node is an operator or operand. 
 
 **Components**
 1. Node: Each node in the tree can be an operand (like numbers) or an operator (like +, -, *, /).
-2. Leaf Nodes: The leaf nodes of the tree are always operands.
+2. Leaf Nodes: The leaf nodes of the tree are always operands (numbers).
 3. Internal Nodes: The internal nodes (not leaves) are operators that perform some operation on their child nodes.
 
 **Structure**
@@ -21,7 +21,6 @@ Arithmetic expression trees are a way to represent expressions through a binary 
 2. If the current node is an operand, return its value.
 3. If the current node is an operator, recursively evaluate its left and right children.
 4. Apply the operator to the values obtained from the children.
-
 
 # Code
 
@@ -55,8 +54,6 @@ def parse_expression():
 
     return node
 ```
-
-
 
 1. `global current_spot`: A global variable used to keep track of the number/operation that is currently being processed.
 2. `node = parse_term()`: Parses the expression and returns a `TreeNode` expressing that term. This term becomes the initial node of the expression tree.
