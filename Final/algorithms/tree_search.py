@@ -61,7 +61,6 @@ def tree_select(i, node):
 root = TreeNode(44, 14)
 root.left = TreeNode(23, 5)
 root.right = TreeNode(63, 8)
-# ... (you'd fill out the rest of the tree here, including sizes) ...
 
 # Now we can select the ith smallest element
 i = 10

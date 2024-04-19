@@ -16,3 +16,9 @@ array = [12, 11, 13, 5, 6]
 insertion_sort(array)
 for i in range(len(array)):
     print ("% d" % array[i])
+    
+
+# Consider a binary tree search of size N, and let k be a number between 1 and N. Assuming that all elements of the tree are distinct, 
+# write a function that returns the kth element of the tree. You have to do so by navigating the tree itself.
+
+class 
