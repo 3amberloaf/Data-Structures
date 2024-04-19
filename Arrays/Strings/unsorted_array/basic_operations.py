@@ -21,6 +21,8 @@ def insertPosition(array, n, x, position):
 
 def remove(array, key):
     array.remove(key)
+    
+
 
 if __name__ == '__main__':
     
