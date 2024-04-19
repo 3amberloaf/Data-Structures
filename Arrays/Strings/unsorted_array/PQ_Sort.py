@@ -1,7 +1,7 @@
 import heapq
 
 def pqSort(array):
-    
+    """ Uses external data structure"""
     priority_queue = []
     
     # iterate through keys and add to priority queue
