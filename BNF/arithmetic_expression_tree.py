@@ -98,7 +98,7 @@ def print_tree(node, prefix=""):
 
 ### Execute ###
 
-expression = tokenizer('{445+21}*{331-1}/91')
+expression = tokenizer('{8/4/2-6*8/3-5}')
 expression_tree = parse_expression(expression)
 result = evaluate_tree(expression_tree)
 print("Result of Evaluation:", result)
