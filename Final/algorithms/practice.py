@@ -1,50 +1,32 @@
-import heapq
+class TreeNode:
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
 
-from numpy import character
-
-
-class Node:
-    def __init__(self, frequency, character, left=None, right=None):
-        self.frequency = frequency
-        self.character = character
-        self.left = left
-        self.right = right
-        self.huffman = ''
-        
-    def __lt__(self, next):
-        return self.frequency < next.frequency
+def build_tree(inorder, preorder):
+    if not inorder or not preorder:
+        return None
     
-def printNodes(node, value = ''):
-    newValue = value + str(node.huffman)
-    
-    if (node.left):
-        printNodes(node.left, newValue)
-    if (node.right):
-        printNodes(node.right, newValue)
-    
-    if (not node.left and not node.right):
-        print(f"{node.character} -> {newValue}")
+    if len(inorder) == 1:
+        return TreeNode(inorder[0])
 
-characters = ['a', 'b', 'c', 'd', 'e', 'f'] 
+    root_val = preorder[0]
+    root = TreeNode(root_val)
+    root_index_in_inorder = inorder.index(root_val)
 
-# frequency of characters 
-frequencies = [5, 9, 12, 13, 16, 45] 
+    inorder_left = inorder[:root_index_in_inorder]
+    inorder_right = inorder[root_index_in_inorder + 1:]
 
-# list containing unused nodes 
-nodes = []
+    preorder_left = preorder[1:1 + len(inorder_left)]
+    preorder_right = preorder[1 + len(inorder_left):]
 
-for x in range(len(characters)):
-    heapq.heappush(nodes, Node(frequencies[x], characters[x]))
+    root.left = build_tree(inorder_left, preorder_left)
+    root.right = build_tree(inorder_right, preorder_right)
 
-while len(nodes) > 1:
-    left = heapq.heappop(nodes)
-    right = heapq.heappop(nodes)
-    
-    left.huffman = 0
-    right.huffman = 1
-    
-    newNode = Node(left.frequency + right.frequency, left.character + right.character, left, right)
-    
-    heapq.heappush(nodes, newNode)
+    return root
 
-printNodes(nodes[0])
+inorder_sequence = ['D', 'B', 'E', 'A', 'F', 'C']
+preorder_sequence = ['A', 'B', 'D', 'E', 'C', 'F']
+tree = build_tree(inorder_sequence, preorder_sequence)
+print(tree)
