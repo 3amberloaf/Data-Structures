@@ -4,13 +4,12 @@ def initialize_matrix(N):
     return G
 
 def computeGn(A, B, N):
-    """ Matrix G2 defines connections via paths of exactly length 2 between nodes """
     
     G = initialize_matrix(N)
            
-    for i in range(1, N):
-        for j in range(1, N):
-            for k in range(1, N):
+    for i in range(N):
+        for j in range(N):
+            for k in range(N):
                 G[i][j] = G[i][j] or (A[i][k] and B[k][j])
     
     return G
