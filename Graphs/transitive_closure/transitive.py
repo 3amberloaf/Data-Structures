@@ -55,14 +55,14 @@ G1_plus = transitiveClosure(G1, N)
 G1_graph = matrix_to_dot(G1)
 G1_plus_graph = matrix_to_dot(G1_plus)
 
-# Print original graph and its transitive closure
+
 print("Original Graph 1 as a Matrix:")
 print_matrix(G1)
 print("\nOriginal Graph 1 as a Graph:")
 print(G1_graph)
-print("\nTransitive Closure of Graph 1:")
+print("\nTransitive Closure as Matrix:")
 print_matrix(G1_plus)
-print("\nTransitive Closure as a Matrix:")
+print("\nTransitive Closure as Graph:")
 print(G1_plus_graph)
 
 # Graph 2
@@ -78,14 +78,14 @@ G2_plus = transitiveClosure(G2, N)
 G2_graph = matrix_to_dot(G2)
 G2_graph_plus = matrix_to_dot(G2_plus)
 
-# Print original graph and its transitive closure
+
 print("Original Graph 2 as a Matrix:")
 print_matrix(G2)
 print("\nOriginal Graph 2 as a Graph:")
 print(G2_graph)
-print("\nTransitive Closure of Graph 2:")
+print("\nTransitive Closure as Matrix:")
 print_matrix(G2_plus)
-print("\nTransitive Closure as a Matrix:")
+print("\nTransitive Closure as Graph:")
 print(G2_graph_plus)
 
 # Graph 3
@@ -102,14 +102,13 @@ G3_plus = transitiveClosure(G3, N)
 G3_graph = matrix_to_dot(G3)
 G3_graph_plus = matrix_to_dot(G3_plus)
 
-# Print original graph and its transitive closure
 print("Original Graph 3 as a Matrix:")
 print_matrix(G3)
 print("\nOriginal Graph 3 as a Graph:")
 print(G3_graph)
-print("\nTransitive Closure of Graph 3:")
+print("\nTransitive Closure as Matrix:")
 print_matrix(G3_plus)
-print("\nTransitive Closure as a Matrix:")
+print("\nTransitive Closure as Graph:")
 print(G3_graph_plus)
 
 # Graph 4
@@ -125,14 +124,13 @@ G4_plus = transitiveClosure(G4, N)
 G4_graph = matrix_to_dot(G4)
 G4_graph_plus = matrix_to_dot(G4_plus)
 
-# Print original graph and its transitive closure
 print("Original Graph 4 as a Matrix:")
 print_matrix(G4)
 print("\nOriginal Graph 4 as a Graph:")
 print(G4_graph)
-print("\nTransitive Closure of Graph 4:")
+print("\nTransitive Closure as Matrix:")
 print_matrix(G4_plus)
-print("\nTransitive Closure as a Matrix:")
+print("\nTransitive Closure as Graph:")
 print(G4_graph_plus)
 
 # Graph 5
@@ -149,14 +147,12 @@ G5_plus = transitiveClosure(G5, N)
 G5_graph = matrix_to_dot(G5)
 G5_graph_plus = matrix_to_dot(G5_plus)
 
-
-# Print original graph and its transitive closure
 print("Original Graph 5 as a Matrix:")
 print_matrix(G5)
 print("\nOriginal Graph 5 as a Graph:")
 print(G5_graph)
-print("\nTransitive Closure of Graph 5:")
+print("\nTransitive Closure as Matrix:")
 print_matrix(G5_plus)
-print("\nTransitive Closure as a Matrix:")
+print("\nTransitive Closure as Graph:")
 print(G5_graph_plus)
   

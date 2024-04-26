@@ -60,7 +60,7 @@
     4 -> 5;
     5 -> 3;
 
-## Transitive Closure of Graph 1:
+## Transitive Closure as Matrix:
 
     0 1 0 0 0 0 0 0
     0 0 1 0 0 0 0 0
@@ -71,7 +71,7 @@
     0 0 0 0 0 0 0 0
     0 0 0 0 0 0 0 0
 
-## Transitive Closure as a Matrix:
+## Transitive Closure as Graph:
 
     0 -> 1;
     1 -> 2;
@@ -116,7 +116,7 @@
     5 -> 4;
 
 
-## Transitive Closure of Graph 2:
+## Transitive Closure as Matrix:
 
     0 1 0 0 0 0 0 0
     1 0 0 0 0 0 0 0
@@ -127,7 +127,7 @@
     0 0 0 0 0 0 0 0
     0 0 0 0 0 0 0 0
 
-## Transitive Closure as a Matrix:
+## Transitive Closure as Graph:
 
     0 -> 1;
     1 -> 0;
@@ -171,7 +171,7 @@
     5 -> 6;
     6 -> 7;
 
-## Transitive Closure of Graph 3:
+## Transitive Closure as Matrix:
 
     0 1 0 0 0 0 0 0
     0 0 1 1 1 1 1 1
@@ -182,7 +182,7 @@
     0 0 0 0 0 0 0 1
     0 0 0 0 0 0 0 0
 
-## Transitive Closure as a Matrix:
+## Transitive Closure as Graph:
 
     0 -> 1;
     1 -> 2;
@@ -237,7 +237,7 @@
     6 -> 7;
 
 
-## Transitive Closure of Graph 4:
+## Transitive Closure as Matrix:
 
     0 1 0 0 0 0 0 0
     0 0 1 1 0 0 0 0
@@ -248,7 +248,7 @@
     0 0 0 0 0 0 0 1
     0 0 0 0 0 0 0 0
 
-## Transitive Closure as a Matrix:
+## Transitive Closure as Graph:
 
     0 -> 1;
     1 -> 2;
@@ -293,7 +293,7 @@
     5 -> 6;
     7 -> 0;
 
-## Transitive Closure of Graph 5:
+## Transitive Closure as Matrix:
 
     0 1 0 0 0 0 0 0
     0 0 1 1 1 1 1 0
@@ -304,7 +304,7 @@
     0 0 0 0 0 0 0 0
     1 0 0 0 0 0 0 0
 
-## Transitive Closure as a Matrix:
+## Transitive Closure as Graph:
 
     0 -> 1;
     1 -> 2;
